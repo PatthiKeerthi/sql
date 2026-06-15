@@ -1,0 +1,22 @@
+show databases;
+-- how to create the database
+create database dm;
+-- how to delete the database
+drop database dm;
+create database employee;
+drop database employee;
+-- use or utilize the database
+create database employee;
+use employee;
+-- how to create a Table
+-- Student ID(varchar,int), Student Name(varchar), Student Marks(decimal,int)
+create table Student(
+Student_ID varchar(30),
+Student_name varchar(40),
+Student_marks int);
+select * from Student;
+-- how to delete the table
+drop table Student;
+create database employee;
+delete from student;
+use employee;
