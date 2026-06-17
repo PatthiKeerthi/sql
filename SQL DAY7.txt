@@ -1,0 +1,71 @@
+create table department1(
+dept_id int primary key,
+dept_location varchar(50),
+dept_name varchar(50));
+select*from department1;
+create table emp(
+emp_id int primary key,
+emp_name varchar(50),
+salary decimal(10,2),
+dept_id int,
+foreign key (dept_id) references department1(dept_id));
+select*from emp;
+insert into department1(dept_id,dept_name,dept_location) values
+(1,'it','mumbai'),
+(2,'hr','delhi'),
+(3,'finance','bangalore'),
+(4,'marketing','chennai'),
+(5,'operation','pune');
+
+insert into emp(emp_id,emp_name,salary,dept_id) values
+(101,'amit',75000,1),
+(102,'priya',55000,2),
+(103,'rahul',65000,1),
+(104,'sneha',45000,3),
+(105,'ananya',70000,null);
+-- retrive employee names along with their department names
+select emp_name,dept_name from emp t1 join department1 t2 on t1.dept_id=t2.dept_id;
+-- display all employess including those without a department
+select emp_name,dept_name from emp t1 left join department1 t2 on t1.dept_id=t2.dept_id;
+-- find employees not assigned to any department
+select emp_name,emp_id from emp t1 left join department1 t2 on t1.dept_id=t2.dept_id where t2.dept_id is null;
+-- find departments with no employees
+select dept_name,emp_name  from emp t1 right join department1 t2 on t1.dept_id=t2.dept_id where t1.emp_id is null;
+-- display employee names with department locations
+ select emp_name,dept_location from emp t1 join department1 t2 on t1.dept_id=t2.dept_id;
+ -- count number of employees in each department
+ select dept_name,count(emp_name) as emp_count from emp t1 left join department1 t2 on t1.dept_id=t2.dept_id  group by emp_id;
+ 
+select dept_name,count(emp_name) as total_emp from 
+ emp t1 right join department1 t2 on t1.dept_id=t2.dept_id 
+ group by t2.dept_name;
+ 
+-- list employees working in IT department
+select dept_name,emp_name  from emp t1 inner join department1 t2 on t1.dept_id=t2.dept_id where t2.dept_location='IT';
+select dept_name,emp_name  from emp t1 right join department1 t2 on t1.dept_id=t2.dept_id where t2.dept_location='IT';
+select dept_name,emp_name  from emp t1 left join department1 t2 on t1.dept_id=t2.dept_id where t2.dept_location='IT';
+-- display all combinations of employees and department
+select * from emp t1 cross join department1 t2;
+-- retrieve salary greater than 60000 along with department names
+select dept_name,salary from 
+ emp t1 inner join department1 t2 on t1.dept_id=t2.dept_id 
+ having salary>60000;
+-- subquery
+use school;
+select * from sales where sales= (select 
+min(sales) from sales);
+
+select min(sales) from sales; 
+select min(sales) from sales group by sales order by sales limit 1;
+
+-- movies.csv in mysql workbench
+-- 1.highest profit movies
+
+select*from movies where gross-budget=(select max(gross-budget)from movies);
+-- find how many movie rating 
+-- greater than avg all movie rating 
+ select count(*) from movies where score>(select avg(score) from movies);
+ -- find highest rated movie on 1987
+ select*from movies where year=1987 and score=(
+ select max(score) from movies where year='1987');
+
