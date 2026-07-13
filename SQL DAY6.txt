@@ -1,0 +1,87 @@
+select owner,sum(price) as total_price from cars group by owner having total_price>1000000;
+select brand,avg(km_driven) from cars group by brand;
+select brand,count(*) as no_of_cars from cars group by brand having no_of_cars>2;
+select*from g;
+select*from users1; -- 1 2 3 4 8 11
+select*from membership; 
+select distinct(user_id) from membership; -- 1 2 3 4 5 6 
+-- cross join 
+select * from users1 t1 cross join g t2;
+select * from g t1 cross join users1 t2;
+select * from users1 t2 cross join g t1;
+-- right join
+select * from membership t1 right join users1 t2 on t1.user_id=t2.user_id;
+select * from users1 t1 right join membership t2 on t1.user_id=t2.user_id;
+select t2.user_id,
+t1.membership_id,
+t1.group_id,
+t2.name,
+t2.emergency_contact,
+t2.age
+from membership t1 right join users1 t2 
+on t1.user_id=t2.user_id;
+
+select  user_id,count(*) as frequency from users1 group by user_id;
+select * from users1 t1 left join membership t2 on t1.user_id=t2.user_id;
+select * from membership t1 left join users1 t2 on t1.user_id=t2.user_id;
+select t1.user_id,
+t1.membership_id,
+t1.group_id,
+t2.name,
+t2.emergency_contact,
+t2.age
+from membership t1 left join users1 t2 
+on t1.user_id=t2.user_id;
+
+select t2.user_id,
+t1.membership_id,
+t1.group_id,
+t2.name,
+t2.emergency_contact,
+t2.age
+from membership t1 inner join users1 t2 
+on t1.user_id=t2.user_id;
+
+select t2.user_id,
+t1.membership_id,
+t1.group_id,
+t2.name,
+t2.emergency_contact,
+t2.age
+from membership t1 join users1 t2 
+on t1.user_id=t2.user_id;
+-- for full join we use this union
+-- left join
+-- union 
+-- right join
+select * from membership t1 left join users1 t2 on t1.user_id=t2.user_id
+union 
+select * from membership t1 right join users1 t2 on t1.user_id=t2.user_id;
+
+select*from users1;
+-- self join -- this will perform in the same table
+select*from users1 t1 join users1 t2 on t1.user_id=t2.emergency_contact;
+
+select*from flip_user; -- user_id name state city
+select*from flip_order; -- order_id user_id order_date
+select*from flip_order t1 join flip_user t2 on t1.user_id=t2.user_id;
+select t2.order_id,
+t1.name,
+t1.city
+from flip_user t1 join flip_order t2 
+on t1.user_id=t2.user_id;
+
+select t2.order_id,name,city from flip_user t1 join flip_order t2 
+on t1.user_id=t2.user_id;
+create table department(
+dept_id int primary key,
+dept_location varchar(50),
+dept_name varchar(50));
+select*from department;
+create table emp(
+emp_id int primary key,
+emp_name varchar(50),
+salary decimal(10,2),
+dept_id int,
+foreign key (dept_id) references department(dept_id));
+select*from emp;

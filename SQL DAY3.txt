@@ -1,0 +1,56 @@
+-- utilize the db
+use school;
+-- i want to create a table
+-- table name is emplo
+-- emp_id varchar
+-- emp_name varchar
+-- emp_des varchar
+-- emp_age int
+create table emplo9(
+emp_id varchar(30),
+emp_name varchar(30),
+emp_des varchar(10),
+emp_age int);
+insert into emplo9(emp_id,emp_name,emp_des,emp_age) 
+values('e101','ad','ds',27),
+('e107','ak','da',20),
+('e109','aks','bde',37),
+('e106','ib','ae',24);
+select*from emplo9;
+update emplo set emp_des='hr' where emp_des='ae';
+-- where emp_age is 27
+-- u have to change 27 to 28
+ update emplo set emp_age=28 where emp_age=27;
+ -- we will modify emp_age,emp_name
+ -- where emp_id='e106'
+ update emplo set emp_age=39,emp_name='pk' where emp_id='e106';
+ -- i want to delete the data where the emp_age=37
+ delete from emplo where emp_age=37;
+ -- i want to delete specific element hr
+ update emplo set emp_des=null where emp_id='e106';
+ -- delete pk where emp_id is e106
+  update emplo set emp_name=null where emp_id='e106';
+  alter table emplo add emp_exp int;
+  -- add new column
+  -- the col name is salary
+  -- the datatype is decimal
+    alter table emplo add emp_sal decimal(10,2);
+    -- add emp_exp=2 where emp_id='e101'
+    -- update
+    update emplo set emp_exp=2 where emp_id='e101';
+    alter table emplo drop column emp_salary;
+    -- u want to drop emp_des, emp_age
+      alter table emplo drop column emp_des, drop column emp_age;
+      alter table emplo modify emp_name varchar(50);
+      select*from emplo9;
+      -- will change the datatype where the emp_age is int
+      -- we want to change to decimal
+       alter table emplo9 modify emp_age decimal(5,2);
+       -- where emp_id try to change emp_id int
+	alter table emplo9 modify emp_id int;
+	alter table emplo9 rename column emp_age to employee_age;
+    alter table emplo9 rename to emplo39;
+    select*from emplo39;
+    use school;
+    truncate table emplo39;
+    drop table emplo39;

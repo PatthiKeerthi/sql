@@ -1,0 +1,70 @@
+   select*from sales;
+    -- orderdate, region , categoty
+    select orderdate,region,category from sales;
+    -- try to extract segment,subcategory,state,orderid
+    select segment,subcategory,state,orderid from sales;
+    select distinct(category) from sales;
+    -- check how mny regions is there 
+select distinct(region) from sales;
+select distinct(subcategory) from sales;
+select orderid as id from sales;
+select orderdate as date from sales;
+-- i want to extract the data regording the technology
+select *from sales;
+select * from sales where category= 'technology';
+select orderid,sales,category from sales where category= 'technology';
+-- fetch the region is east
+select * from sales where region= 'east';
+-- i want to extract the data where the quantity is greater than 5 
+-- sales is less that 10 
+select * from sales where quantity>5;
+select * from sales where sales<10;
+select * from sales where quantity>5 or sales<10;
+-- try to extract the data where category = technology and city=texas
+select * from sales where category='technology' and state='texas';
+-- quantity> 2 
+-- subcategory is art
+-- sales >10
+select * from sales where quantity>2 and subcategory='art' and sales>10;
+select orderid,shipmode from sales where quantity>2 and subcategory='art' and sales>10;
+-- i want to extract the information where region is east and west
+select * from sales where region='east' or  region='west';
+-- try to findout the data where the subcategory is art and paper
+-- try to findout the data where the subcategory is paper,region is west as well as sales>3
+select * from sales where subcategory='art' or subcategory='paper';
+select * from sales where subcategory='paper' and region='west' and sales>3;
+-- i dont want the inforamtion regarding technology
+select*from sales where not category='technology';
+select*from sales where not region='central';
+select*from sales order by sales;
+-- by default it takes ascending
+select*from sales order by sales asc;
+select*from sales order by quantity desc;
+-- where category='technology' and sales in decs 
+select*from sales where category='technology' order by sales desc;
+select*from sales order by orderdate; 
+-- str to date 
+select*from sales order by str_to_date(orderdate,'%d-%m-%Y') asc;
+select*from sales where category is not  null;
+select*from sales where category='technology' order by sales desc limit 5;
+select*from sales order by sales desc limit 5;
+-- top 10 quantity record in desc order
+select*from sales order by quantity desc limit 10;
+-- first largest sales
+-- limit
+-- offset
+select*from sales order by sales desc limit 1,1;
+select*from sales order by sales desc limit 1;
+select*from sales order by sales desc limit 2,1;
+select*from sales order by sales desc limit 3,2;
+select*from sales order by sales desc limit 1,5;
+select*from sales order by sales desc limit 0;
+select*from sales order by sales desc limit 1 offset 1; -- it like reverse process observe the difference
+-- try to find the third largest quantity 
+select*from sales order by quantity desc limit 2,1;
+select*from sales order by quantity desc limit 1 offset 2;
+-- the above 207 and 208 lines are same 
+-- from  third largest we wnat the 2 values
+select*from sales order by quantity desc limit 2,2;
+select*from sales where region like 'w%';
+select*from sales where category='%no%';
